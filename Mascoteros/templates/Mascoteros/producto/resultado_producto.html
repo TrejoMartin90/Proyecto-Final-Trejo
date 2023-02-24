@@ -1,0 +1,34 @@
+{% extends "Mascoteros/parent.html" %}
+{% load static %}
+{% block contenidoDinamico %}
+
+<h1 class="card-title">Resultados de búsqueda por Nombre: {{ nombre }}</h1>
+<div class="row gx-2 gx-lg-2 align-items-center my-2"></div>
+
+{% if productos %}
+<div class="card-deck"></div>
+    <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-left">
+        {% for producto in productos %}
+        <div class="col mb-5">
+            <a href="{% url 'ProductosDetalle' producto.id %}">
+                <div class="card h-100">
+                    <img class="card-img-top-list" src="{{producto.imagen.url}}" alt="..." />
+                    <div class="card-body p-4">
+                            <h5 class="fw-bolder">{{producto.nombre}}</h5>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endfor %} 
+    </div>   
+</div>    
+
+{% else %}
+
+<h3 class="card-title">No se han encontrado resultados</h3>
+<div class="justify-content-center">
+    <img src="{% static 'Mascoteros/images/sin_resultados_busqueda.svg' %}" class="centered-image rounded mx-auto d-block" alt="...">
+</div>
+{% endif %}
+
+{% endblock %}
